@@ -19,6 +19,8 @@ const weightChart: Ref<Chart | null> = shallowRef(null);
 
 const weightInput = ref(60.0);
 
+const dateInput = ref("");
+
 const currentWeight: ComputedRef<IWeightDate | IWeight> = computed(() => {
   return (
     weights.value.sort(
@@ -30,7 +32,9 @@ const currentWeight: ComputedRef<IWeightDate | IWeight> = computed(() => {
 const addWeight = () => {
   weights.value.push({
     weight: weightInput.value,
-    date: new Date().getTime(),
+    date: dateInput.value
+      ? new Date(dateInput.value).getTime()
+      : new Date().getTime(),
   });
 };
 
@@ -104,6 +108,8 @@ watch(
 
     <form @submit.prevent="addWeight">
       <input type="number" step="0.1" v-model="weightInput" />
+      <div class="divider"></div>
+      <input type="date" step="0.1" v-model="dateInput" />
       <input type="submit" value="Add weight" />
     </form>
 
@@ -192,6 +198,20 @@ form:hover {
   border-width: 2px;
 }
 form input[type="number"] {
+  appearance: none;
+  outline: none;
+  border: none;
+  background-color: white;
+  flex: 1 1 0%;
+  padding: 1rem 1.5rem;
+  font-size: 1.25rem;
+}
+form .divider {
+  border-left: 1px solid #aaa;
+  height: auto;
+}
+
+form input[type="date"] {
   appearance: none;
   outline: none;
   border: none;
