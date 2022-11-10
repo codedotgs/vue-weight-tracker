@@ -107,10 +107,10 @@ watch(
     </div>
 
     <form @submit.prevent="addWeight">
-      <input type="number" step="0.1" v-model="weightInput" />
+      <input type="number" v-model="weightInput" />
       <div class="divider"></div>
-      <input type="date" step="0.1" v-model="dateInput" />
-      <input type="submit" value="Add weight" />
+      <input type="date" v-model="dateInput" />
+      <input type="submit" value="+" />
     </form>
 
     <div v-if="weights?.length">
@@ -146,6 +146,10 @@ body {
   background-color: #eee;
 }
 main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 1.5rem;
 }
 h1 {
@@ -158,6 +162,7 @@ h2 {
   color: #888;
   font-weight: 400;
 }
+
 .current {
   display: flex;
   flex-direction: column;
@@ -202,13 +207,15 @@ form input[type="number"] {
   outline: none;
   border: none;
   background-color: white;
-  flex: 1 1 0%;
-  padding: 1rem 1.5rem;
+  padding: 0.75rem;
   font-size: 1.25rem;
+  flex-shrink: 3;
+  text-align: center;
 }
 form .divider {
   border-left: 1px solid #aaa;
   height: auto;
+  width: 0rem;
 }
 
 form input[type="date"] {
@@ -216,30 +223,34 @@ form input[type="date"] {
   outline: none;
   border: none;
   background-color: white;
-  flex: 1 1 0%;
-  padding: 1rem 1.5rem;
-  font-size: 1.25rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  flex-grow: 2;
+  flex-shrink: 0;
 }
 form input[type="submit"] {
+  flex-grow: 2;
   appearance: none;
   outline: none;
   border: none;
   cursor: pointer;
   background-color: hotpink;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem;
   color: white;
   font-size: 1.25rem;
   font-weight: 700;
   transition: 200ms linear;
   border-left: 3px solid transparent;
+  flex-shrink: 0;
 }
 form input[type="submit"]:hover {
   background-color: white;
   color: hotpink;
   border-left-color: hotpink;
 }
+
 .canvas-box {
-  width: 100%;
+  width: 100vw;
   max-width: 720px;
   background-color: white;
   padding: 1rem;
